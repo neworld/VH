@@ -1,0 +1,3 @@
+[submodule "libs/freeflow"]
+	path = libs/freeflow
+	url = git@github.com:neworld/FreeFlow.git
