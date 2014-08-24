@@ -1,2 +1,3 @@
 include ':app'
 include ':libs:freeflow:FreeFlow'
+include ':libs:PhotoView:library'

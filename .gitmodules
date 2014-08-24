@@ -1,3 +1,6 @@
 [submodule "libs/freeflow"]
 	path = libs/freeflow
 	url = git@github.com:neworld/FreeFlow.git
+[submodule "libs/PhotoView"]
+	path = libs/PhotoView
+	url = git@github.com:eskimi/PhotoView.git

@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.comcast.freeflow.core.AbsLayoutContainer;
 import com.comcast.freeflow.core.FreeFlowContainer;
+import com.comcast.freeflow.core.FreeFlowItem;
 import com.comcast.freeflow.layouts.VLayout;
 
 import javax.inject.Inject;
@@ -19,11 +21,12 @@ import dagger.ObjectGraph;
 import lt.neworld.vh.R;
 import lt.neworld.vh.Rest.FlickrApi;
 import lt.neworld.vh.Rest.FlickrApiModule;
+import lt.neworld.vh.models.Photo;
 import lt.neworld.vh.models.PhotoSet;
 import lt.neworld.vh.widget.adapters.PhotoSetAdapter;
 import lt.neworld.vh.widget.layouts.VHLayout;
 
-public class PhotoSetList extends Fragment {
+public class PhotoSetList extends Fragment implements AbsLayoutContainer.OnItemClickListener {
     @InjectView(R.id.fr_photo_set_list_container)
     FreeFlowContainer container;
 
@@ -44,8 +47,16 @@ public class PhotoSetList extends Fragment {
         ButterKnife.inject(this, view);
 
         this.container.setLayout(new VHLayout(getActivity()));
+        this.container.setOnItemClickListener(this);
 
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        ButterKnife.reset(this);
     }
 
     @Override
@@ -60,6 +71,14 @@ public class PhotoSetList extends Fragment {
         adapter.onLoadMoreData();
 
         container.setAdapter(adapter);
+    }
+
+    @Override
+    public void onItemClick(AbsLayoutContainer parent, FreeFlowItem proxy) {
+        getFragmentManager().beginTransaction()
+                .addToBackStack("PhotoPreview")
+                .add(R.id.root, PhotoPreviewFragment.createInstance((Photo) proxy.data))
+                .commit();
     }
 
     private class RecentPhotoSetAdapter extends PhotoSetAdapter {
