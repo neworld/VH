@@ -3,6 +3,8 @@ package lt.neworld.vh.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Photo implements Parcelable {
     public String id;
     public String owner;
@@ -10,6 +12,15 @@ public class Photo implements Parcelable {
     public String server;
     public String farm;
     public String title;
+
+    @SerializedName("ownername")
+    public String ownerName;
+
+    @SerializedName("iconserver")
+    public String iconServer;
+
+    @SerializedName("iconfarm")
+    public String iconFarm;
 
     public Photo() {
 
@@ -22,10 +33,17 @@ public class Photo implements Parcelable {
         server = source.readString();
         farm = source.readString();
         title = source.readString();
+        ownerName = source.readString();
+        iconServer = source.readString();
+        iconFarm = source.readString();
     }
 
     public String getUrl() {
         return String.format("https://farm%s.staticflickr.com/%s/%s_%s.jpg", farm, server, id, secret);
+    }
+
+    public String getAvatarUrl() {
+        return String.format("https://farm%s.staticflickr.com/%s/buddyicons/%s.jpg", iconFarm, iconServer, owner);
     }
 
     @Override
@@ -41,6 +59,9 @@ public class Photo implements Parcelable {
         dest.writeString(server);
         dest.writeString(farm);
         dest.writeString(title);
+        dest.writeString(ownerName);
+        dest.writeString(iconServer);
+        dest.writeString(iconFarm);
     }
 
     public static Creator<Photo> CREATOR = new Creator<Photo>() {
