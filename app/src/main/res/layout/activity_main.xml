@@ -5,10 +5,4 @@
     tools:context=".MainActivity"
     android:id="@+id/root">
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="lt.neworld.vh.fragments.PhotoSetList"
-        android:id="@+id/photo_set"/>
-
 </FrameLayout>
