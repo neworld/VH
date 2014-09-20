@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="lt.neworld.vh" >
 
+    <instrumentation
+        android:name="com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
+        android:targetPackage="lt.neworld.vh"/>
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application

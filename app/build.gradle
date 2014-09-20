@@ -15,6 +15,10 @@ android {
     buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
 
     defaultConfig {
+        testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
+    }
+
+    defaultConfig {
         applicationId "lt.neworld.vh"
         minSdkVersion Integer.parseInt(project.ANDROID_BUILD_MIN_SDK_VERSION)
         targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
@@ -26,6 +30,10 @@ android {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
     }
 }
 
@@ -42,4 +50,8 @@ dependencies {
 
     androidTestCompile 'com.squareup:fest-android:1.0.7'
     androidTestCompile 'com.squareup.spoon:spoon-client:1.1.1'
+
+    androidTestCompile('com.jakewharton.espresso:espresso:1.1-r3') {
+        exclude group: 'com.squareup.dagger'
+    }
 }
